@@ -1,10 +1,12 @@
 import { createFromJSON } from '@libp2p/peer-id-factory';
 import { multiaddr } from '@multiformats/multiaddr';
-import { createLibp2p   
- } from './libp2p';
+import { createLibp2p   } from 'libp2p';
 import peerIdDialerJson from './peer-id-dialer';
 import peerIdListenerJson from './peer-id-listener';
 import { stdinToStream, streamToConsole } from './stream';
+import { tcp } from '@libp2p/tcp'
+import { noise } from '@chainsafe/libp2p-noise'
+import { mplex } from '@libp2p/mplex'
 
 async function run() {
   const [idDialer, idListener] = await Promise.all([
@@ -18,6 +20,9 @@ async function run() {
     addresses: {
       listen: ['/ip4/0.0.0.0/tcp/0'],
     },
+    transports: [tcp()],
+    connectionEncryption: [noise()],
+    streamMuxers: [mplex()]
   });
 
   // Output this node's address
@@ -27,7 +32,7 @@ async function run() {
   });
 
   // Dial to the remote peer (the "listener")
-  const listenerMa = multiaddr(`/ip4/127.0.0.1/tcp/10333/p2p/${idListener.toString()}`);
+  const listenerMa = multiaddr(`/ip4/0.0.0.0/tcp/10333/p2p/${idListener.toString()}`);
   const stream = await nodeDialer.dialProtocol(listenerMa, '/chat/1.0.0');
 
   console.log('Dialer dialed to listener on protocol:   /chat/1.0.0');
