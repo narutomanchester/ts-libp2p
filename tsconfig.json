@@ -2,8 +2,9 @@
   "compilerOptions": {
 //    "module": "commonjs",
 //    "target": "es2017",
-    "module": "es2022", // ensures output is ESM
-    "target": "es2022", // support modern features like private identifiers
+    "lib": ["ES2022"],
+    "module": "es2022",
+    "target": "es2022", 
     "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,

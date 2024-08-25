@@ -2,10 +2,11 @@
   "name": "@ts-ibp2p/example-chat",
   "version": "0.0.0",
   "main": "index.ts",
+  "type": "module",
   "dependencies": {
-    "@chainsafe/libp2p-noise": "^15.0.0",
-    "@chainsafe/libp2p-yamux": "^6.0.1",
-    "@libp2p/peer-id-factory": "^4.0.0",
+    "@chainsafe/libp2p-noise": "^15.1.1",
+    "@chainsafe/libp2p-yamux": "^6.0.2",
+    "@libp2p/peer-id-factory": "^4.2.4",
     "@libp2p/tcp": "^9.0.4",
     "@libp2p/websockets": "^8.0.4",
     "@multiformats/multiaddr": "^12.1.11",
@@ -15,6 +16,7 @@
     "it-pipe": "^3.0.1",
     "libp2p": "^1.9.2",
     "p-defer": "^4.0.0",
+    "tsx": "^4.18.0",
     "typescript": "^5.5.4",
     "uint8arrays": "^5.1.0"
   }

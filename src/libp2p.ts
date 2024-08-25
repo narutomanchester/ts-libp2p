@@ -9,7 +9,7 @@ export async function createLibp2p (_options) {
   const defaults = {
     transports: [
       tcp(),
-      webSockets()
+      // webSockets()
     ],
     streamMuxers: [
       yamux()
