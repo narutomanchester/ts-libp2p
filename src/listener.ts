@@ -1,25 +1,25 @@
 import { createFromJSON } from '@libp2p/peer-id-factory';
-// import { createLibp2p } from './libp2p';
 import { createLibp2p  } from 'libp2p'
 import { noise } from '@chainsafe/libp2p-noise'
-import { yamux } from '@chainsafe/libp2p-yamux'
 import { mplex } from '@libp2p/mplex'
+import { yamux } from '@chainsafe/libp2p-yamux'
 import { tcp } from '@libp2p/tcp'
 import peerIdListenerJson from   './peer-id-listener';
 import { stdinToStream, streamToConsole } from './stream';
+import { webSockets } from '@libp2p/websockets'
 
 async function run() {
   // Create a new libp2p node with the given multi-address
   const idListener = await createFromJSON(peerIdListenerJson);
-  // console.log(idListener)
+  console.log(idListener.toString())
   const nodeListener = await createLibp2p({
     peerId: idListener,
     addresses: {
-      listen: ['/ip4/0.0.0.0/tcp/10334'],
+      listen: ['/ip4/0.0.0.0/tcp/10333'],
     },
-    transports: [tcp()],
+    transports: [tcp(), webSockets()],
     connectionEncryption: [noise()],
-    streamMuxers: [mplex()]
+    streamMuxers: [yamux()]
   })
 
   // Log a message when a remote peer connects to us
